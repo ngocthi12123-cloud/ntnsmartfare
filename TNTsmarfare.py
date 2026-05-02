@@ -688,33 +688,7 @@ with col_ctrl:
         st.session_state.weather = chosen_weather
         w = WEATHER[chosen_weather]
 
-        st.markdown(f"""
-<div style="
-display:flex;
-align-items:center;
-gap:14px;
-padding:14px;
-background:rgba(59,130,246,0.08);
-border:1px solid rgba(96,165,250,0.4);
-border-radius:14px;
-margin-top:10px;
-">
-  <div style="
-    width:50px;
-    height:50px;
-    border-radius:12px;
-    background:rgba(96,165,250,0.15);
-    display:flex;
-    align-items:center;
-    justify-content:center;">
-    <i class="fa-solid {w['icon']}" style="font-size:22px;color:#60a5fa;"></i>
-  </div>
-  <div>
-    <div style="color:#60a5fa;font-weight:700;font-size:15px;">{w['name']}</div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
+    
         promo_code = st.text_input("🎟️ Mã giảm giá", placeholder="Nhập mã giảm giá", key="promo").upper()
         discount_val = 0
         if promo_code == "UEH":
