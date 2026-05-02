@@ -1,5 +1,3 @@
-# copy từ app5
-# này dùng cho github
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
@@ -578,7 +576,7 @@ def calculate_price(dist, vehicle_key, sim, is_raining, promo_code):
       surge += 0.08
     elif weather == "storm":
       surge += 0.15
-    surge = min(1.8, surge)
+    surge = min(1.5, surge)
 
     total = base_fare * surge
 
