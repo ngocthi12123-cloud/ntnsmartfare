@@ -1,0 +1,10 @@
+streamlit
+streamlit-folium
+folium
+requests
+numpy
+scipy
+scikit-fuzzy
+networkx
+geopy
+pytz==2024.1
