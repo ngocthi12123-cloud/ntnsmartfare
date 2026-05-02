@@ -584,7 +584,12 @@ def calculate_price(dist, vehicle_key, sim, promo_code):
       surge += 0.08
     elif weather == "storm":
       surge += 0.15
-    surge = min(1.8, surge)
+    if auto_demand < 3:
+      surge = max(1.0, surge)
+    elif auto_demand < 6:
+      surge = max(1.1, surge)
+    else:
+      surge = max(1.2, surge)
 
     total = base_fare * surge
 
