@@ -555,8 +555,14 @@ current_time = datetime.now(VN_TZ).strftime("%H:%M")
 sim.input['traffic'] = auto_tf
 sim.input['demand'] = auto_demand
 
-is_raining = st.session_state.get("rain_toggle", False)
-sim.input['weather'] = 8 if is_raining else 2
+weather_state = st.session_state.get("weather", "clear")
+
+if weather_state == "clear":
+    sim.input['weather'] = 2
+elif weather_state == "rain":
+    sim.input['weather'] = 6
+else:  # storm
+    sim.input['weather'] = 9
 
 # ✅ BẮT BUỘC: compute trước
 sim.compute()
@@ -564,7 +570,7 @@ sim.compute()
 # ✅ Sau đó mới dùng output
 # Chuẩn hóa fuzzy output (0–100) → surge (1.0 – 1.8)
 # Surge từ fuzzy
-def calculate_price(dist, vehicle_key, sim, is_raining, promo_code):
+def calculate_price(dist, vehicle_key, sim, promo_code):
     v = VEHICLES[vehicle_key]
 
     # Base fare
@@ -578,7 +584,7 @@ def calculate_price(dist, vehicle_key, sim, is_raining, promo_code):
       surge += 0.08
     elif weather == "storm":
       surge += 0.15
-    surge = min(1.5, surge)
+    surge = min(1.8, surge)
 
     total = base_fare * surge
 
@@ -691,7 +697,7 @@ with col_ctrl:
         w = WEATHER[chosen_weather]
 
         st.markdown(f"""
-  <div style="
+<div style="
 display:flex;
 align-items:center;
 gap:14px;
@@ -789,19 +795,26 @@ if map_output and map_output.get('last_object_clicked'):
 # --- ĐOẠN TÍNH TOÁN VÀ HIỂN THỊ KẾT QUẢ ---
 if dist > 0:
     final_price, surge, base_fare = calculate_price(
-        dist,
-        st.session_state.vehicle,
-        sim,
-        is_raining,
-        promo_code
-    )
-
+    dist,
+    st.session_state.vehicle,
+    sim,
+    promo_code
+)
     v = VEHICLES[st.session_state.vehicle]
 
     eta = max(1, int(dist * v['speed']))
     
-    weather_icon = "fa-cloud-showers-heavy" if is_raining else "fa-sun"
-    weather_text = "Mưa/Bão" if is_raining else "Trời tốt"
+    weather_state = st.session_state.get("weather", "clear")
+
+    if weather_state == "clear":
+      weather_icon = "fa-sun"
+      weather_text = "Trời đẹp"
+    elif weather_state == "rain":
+      weather_icon = "fa-cloud-rain"
+      weather_text = "Mưa vừa"
+    else:
+      weather_icon = "fa-cloud-showers-heavy"
+      weather_text = "Mưa lớn"
     promo_display = promo_code if promo_code else "Không có"
     st.markdown(f"""
     <div class="result-shell">
