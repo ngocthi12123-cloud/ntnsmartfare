@@ -691,16 +691,6 @@ with col_ctrl:
         w = WEATHER[chosen_weather]
 
         st.markdown(f"""
-<div style="
-display:flex;
-align-items:center;
-gap:14px;
-padding:14px;
-background:rgba(59,130,246,0.08);
-border:1px solid rgba(96,165,250,0.4);
-border-radius:14px;
-margin-top:10px;
-">
   <div style="
     width:50px;
     height:50px;
