@@ -711,7 +711,6 @@ margin-top:10px;
   </div>
   <div>
     <div style="color:#60a5fa;font-weight:700;font-size:15px;">{w['name']}</div>
-    <div style="color:#94a3b8;font-size:12px;">Ảnh hưởng đến giá & traffic AI</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
