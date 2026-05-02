@@ -687,7 +687,7 @@ with col_ctrl:
 )
         st.session_state.weather = chosen_weather
         w = WEATHER[chosen_weather]
-                st.markdown(f"""
+        st.markdown(f"""
 <div style="
 display:flex;
 align-items:center;
