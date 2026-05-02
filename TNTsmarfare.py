@@ -1,3 +1,5 @@
+# copy từ app5
+# này dùng cho github
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
@@ -576,7 +578,7 @@ def calculate_price(dist, vehicle_key, sim, is_raining, promo_code):
       surge += 0.08
     elif weather == "storm":
       surge += 0.15
-    surge = min(1.5, surge)
+    surge = min(1.8, surge)
 
     total = base_fare * surge
 
@@ -687,6 +689,7 @@ with col_ctrl:
 )
         st.session_state.weather = chosen_weather
         w = WEATHER[chosen_weather]
+
         st.markdown(f"""
 <div style="
 display:flex;
@@ -707,10 +710,9 @@ margin-top:10px;
     align-items:center;
     justify-content:center;">
     <i class="fa-solid {w['icon']}" style="font-size:22px;color:#60a5fa;"></i>
-  </div>
-  """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
-    
         promo_code = st.text_input("🎟️ Mã giảm giá", placeholder="Nhập mã giảm giá", key="promo").upper()
         discount_val = 0
         if promo_code == "UEH":
