@@ -663,7 +663,8 @@ with col_ctrl:
 
 
     st.markdown('<div class="panel-title" style="margin-top:18px;"><i class="fa-solid fa-sliders"></i> Tùy chọn & Ưu đãi</div>', unsafe_allow_html=True)
-
+    with st.container(border=True):
+       
 
         promo_code = st.text_input("🎟️ Mã giảm giá", placeholder="Nhập mã giảm giá", key="promo").upper()
         discount_val = 0
