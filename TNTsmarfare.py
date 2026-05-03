@@ -572,35 +572,20 @@ sim.compute()
 # Surge từ fuzzy
 def calculate_price(dist, vehicle_key, sim, promo_code):
     v = VEHICLES[vehicle_key]
-
-    # Base fare
+    # 1. Tính giá cơ bản dựa trên km
     base_fare = v['base'] if dist <= 2 else v['base'] + (dist - 2) * v['km_rate']
-
-    # Surge
+    
+    # 2. Tính hệ số Surge từ bộ não Fuzzy
     surge = 1.0 + (sim.output['price'] / 100) * 0.8
-    weather = st.session_state.get("weather", "clear")
-
-    if weather == "rain":
-      surge += 0.08
-    elif weather == "storm":
-      surge += 0.15
-    if auto_demand < 3:
-      surge = max(1.0, surge)
-    elif auto_demand < 6:
-      surge = max(1.1, surge)
-    else:
-      surge = max(1.2, surge)
-
-   # 1. Tính giá tổng (đã có Surge)
+    
+    # 3. Tính tổng tiền và LÀM TRÒN TRƯỚC (Ví dụ ra 81.000)
     total = base_fare * surge
+    total = round(total / 1000) * 1000 
     
-    # 2. Làm tròn về đơn vị nghìn đồng TRƯỚC
-    total = round(total / 1000) * 1000
-    
-    # 3. Trừ mã giảm giá SAU khi đã làm tròn
+    # 4. Trừ mã giảm giá SAU CÙNG để đảm bảo trừ đúng số tiền
     if promo_code == "UEH":
         total -= 10000
-    elif promo_code == "LT0001":
+    elif promo_code == "LUONGVE" or promo_code == "LT0001":
         total *= 0.9
         
     final_price = max(0, int(total))
