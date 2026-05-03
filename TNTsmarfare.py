@@ -663,44 +663,7 @@ with col_ctrl:
 
 
     st.markdown('<div class="panel-title" style="margin-top:18px;"><i class="fa-solid fa-sliders"></i> Tùy chọn & Ưu đãi</div>', unsafe_allow_html=True)
-    with st.container(border=True):
-        st.markdown("### 🌦️ Chọn thời tiết")
 
-        WEATHER = {
-    "clear": {"icon": "fa-sun", "name": "Trời đẹp", "val": 2},
-    "rain": {"icon": "fa-cloud-rain", "name": "Mưa vừa", "val": 6},
-    "storm": {"icon": "fa-cloud-showers-heavy", "name": "Mưa lớn", "val": 9},
-}
-
-        if "weather" not in st.session_state:
-            st.session_state.weather = "clear"
-
-        w_keys = list(WEATHER.keys())
-        idx = w_keys.index(st.session_state.weather)
-        chosen_weather = st.radio(
-        "Thời tiết",
-          options=w_keys,
-          format_func=lambda x: WEATHER[x]["name"],
-          index=idx,
-          horizontal=True,
-          label_visibility="collapsed",
-)
-        st.session_state.weather = chosen_weather
-        w = WEATHER[chosen_weather]
-
-        st.markdown(f"""
-
-  <div style="
-    width:50px;
-    height:50px;
-    border-radius:12px;
-    background:rgba(96,165,250,0.15);
-    display:flex;
-    align-items:center;
-    justify-content:center;">
-    <i class="fa-solid {w['icon']}" style="font-size:22px;color:#60a5fa;"></i>
-</div>
-""", unsafe_allow_html=True)
 
         promo_code = st.text_input("🎟️ Mã giảm giá", placeholder="Nhập mã giảm giá", key="promo").upper()
         discount_val = 0
