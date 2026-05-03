@@ -591,18 +591,20 @@ def calculate_price(dist, vehicle_key, sim, promo_code):
     else:
       surge = max(1.2, surge)
 
+   # 1. Tính giá tổng (đã có Surge)
     total = base_fare * surge
-
-    # Discount
+    
+    # 2. Làm tròn về đơn vị nghìn đồng TRƯỚC
+    total = round(total / 1000) * 1000
+    
+    # 3. Trừ mã giảm giá SAU khi đã làm tròn
     if promo_code == "UEH":
         total -= 10000
-    elif promo_code == "LUONGVE":
+    elif promo_code == "LT0001":
         total *= 0.9
-
-    final_price = max(0, round(total / 1000) * 1000)
-
+        
+    final_price = max(0, int(total))
     return final_price, surge, base_fare
-
 st.markdown(f"""
 <div class="hero-wrap">
   <div class="hero-content">
