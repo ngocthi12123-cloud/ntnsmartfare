@@ -720,8 +720,8 @@ with col_ctrl:
         if promo_code == "UEH":
             st.success("✅ Mã UEH: Giảm 10.000đ")
             discount_val = 10000
-        elif promo_code == "LUONGVE":
-            st.success("✅ Mã LUONGVE: Giảm 10%")
+        elif promo_code == "LT0001":
+            st.success("✅ Mã LT0001: Giảm 10%")
         elif promo_code != "":
             st.warning("⚠️ Mã không hợp lệ.")
 with col_map:
