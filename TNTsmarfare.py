@@ -584,7 +584,7 @@ def calculate_price(dist, vehicle_key, sim, promo_code):
     
     # 4. Trừ mã giảm giá SAU CÙNG để đảm bảo trừ đúng số tiền
     if promo_code == "UEH":
-    total = total - 10000  
+        total = total - 10000  
     elif promo_code == "LUONGVE" or promo_code == "LT0001":
         total *= 0.9
         
