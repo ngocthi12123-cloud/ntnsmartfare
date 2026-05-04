@@ -1,5 +1,3 @@
-# copy từ app5
-# này dùng cho github
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
